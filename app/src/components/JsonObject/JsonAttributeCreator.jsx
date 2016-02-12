@@ -96,7 +96,9 @@ export default class JsonAttributeCreator extends React.Component {
         <Button
           className="adder-trigger"
           onClick={this.handleCreate}
-          bsSize="xsmall">+</Button>
+          bsSize="xsmall">
+            + {this.props.type}
+        </Button>
       );
     }
     let attrName;
@@ -179,4 +181,5 @@ const optionalParentPropTypes = React.PropTypes.oneOfType([
 JsonAttributeCreator.propTypes = {
   attrKey: optionalPropTypes,
   parent: optionalParentPropTypes,
+  type: React.PropTypes.string,
 };

@@ -67,10 +67,21 @@
           display: inline-block;
           width: 100px;
           height: 30px;
-          padding-top: 5px;
-          padding-bottom: 5px;
           font-size: 14px;
           vertical-align: top;
+
+          .form-group {
+            margin-bottom: 2px;
+
+            .json-attr {
+              &.form-control {
+                height: 30px;
+                border: none;
+                background: none;
+                box-shadow: none;
+              }
+            }
+          }
         }
         .json-attribute-value {
           display: inline-block;

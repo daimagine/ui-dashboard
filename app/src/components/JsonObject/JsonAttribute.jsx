@@ -1,11 +1,51 @@
 import React from 'react';
+import { Input } from 'react-bootstrap';
 import * as Components from 'components';
 
 
 export default class JsonAttribute extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      attrKey: this.props.attrKey,
+    };
+  }
+
   shouldComponentUpdate(nextProps) {
     return nextProps.value !== this.props.value ||
+      nextProps.attrKey !== this.props.attrKey ||
       nextProps.parent !== this.props.parent;
+  }
+
+  setAttrKey() {
+    if (this.state.modified) {
+      if (this.props.parent.constructor === Array) {
+        this.props.parent.splice(this.props.attrKey, 1)
+          .set(
+            this.state.attrKey,
+            this.props.value
+          );
+      } else {
+        this.props.parent.remove(this.props.attrKey)
+          .set(
+            this.state.attrKey,
+            this.props.value
+          );
+      }
+    }
+  }
+
+  updateAttrKey = (e) => {
+    this.setState({
+      attrKey: e.target.value,
+      modified: e.target.value !== this.props.attrKey,
+    });
+  }
+
+  handleKeyDown = (e) => {
+    if (e.which === 13) {
+      this.setAttrKey();
+    }
   }
 
   guessType(value) {
@@ -89,6 +129,15 @@ export default class JsonAttribute extends React.Component {
     let attrKey = this.props.attrKey;
     if (this.props.parent.constructor === Array) {
       attrKey = Number(this.props.attrKey) + 1;
+    } else {
+      attrKey = (
+        <Input type="text" ref="input"
+          className="json-attr"
+          defaultValue={this.state.attrKey}
+          onChange={this.updateAttrKey}
+          onBlur={this.setAttrKey.bind(this)}
+          onKeyDown={this.handleKeyDown} />
+      );
     }
     return (
       <div className={className}>

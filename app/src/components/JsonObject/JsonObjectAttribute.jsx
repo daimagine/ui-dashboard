@@ -19,7 +19,7 @@ export default class JsonObjectAttribute extends React.Component {
     return (
       <div className="json-object-attr">
         <div className="json-object-toggle object">
-          <span>Object [{keys.length}]</span>
+          <span>Map [{keys.length}]</span>
         </div>
         <div className="json-object-toggle-value">
           {attrs}
