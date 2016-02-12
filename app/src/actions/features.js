@@ -8,6 +8,13 @@ export function fetchFeaturesSuccess(features) {
   };
 }
 
+export function updateFeatureRuleSuccess(feature) {
+  return {
+    type: 'UPDATE_FEATURE_RULE_SUCCESS',
+    feature,
+  };
+}
+
 export function fetchFeatures() {
   // return (dispatch) => {
   //   request({
@@ -49,8 +56,38 @@ export function fetchFeatures() {
         },
       ],
     },
+  }, {
+    id: 'subsribe_us',
+    service: 'detect',
+    data: {
+      values: {
+        key2: 'val2',
+      },
+    },
   }];
   return (dispatch) => {
     dispatch(fetchFeaturesSuccess(features));
+  };
+}
+
+export function addFeatureRule(feature, key) {
+  // TODO: hit api
+  return (dispatch, getState) => {
+    const state = getState();
+    const features = state.entities.features;
+    const newFeature = Object.assign({}, features[feature.id]);
+    newFeature.data[key] = {};
+    dispatch(updateFeatureRuleSuccess(newFeature));
+  };
+}
+
+export function removeFeatureRule(feature, key) {
+  // TODO: hit api
+  return (dispatch, getState) => {
+    const state = getState();
+    const features = state.entities.features;
+    const newFeature = Object.assign({}, features[feature.id]);
+    delete newFeature.data[key];
+    dispatch(updateFeatureRuleSuccess(newFeature));
   };
 }

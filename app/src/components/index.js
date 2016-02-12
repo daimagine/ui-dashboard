@@ -10,6 +10,7 @@ import FeatureItem from './Features/FeatureItem';
 import FeatureValues from './Features/FeatureValues';
 import FeaturePartitions from './Features/FeaturePartitions';
 import FeatureRules from './Features/FeatureRules';
+import FeatureRuleCreator from './Features/FeatureRuleCreator';
 
 import JsonObject from './JsonObject/JsonObject';
 import JsonAttribute from './JsonObject/JsonAttribute';
@@ -30,6 +31,7 @@ export {
   FeatureValues,
   FeaturePartitions,
   FeatureRules,
+  FeatureRuleCreator,
 
   JsonObject,
   JsonAttribute,

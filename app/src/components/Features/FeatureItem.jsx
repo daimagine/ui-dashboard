@@ -1,13 +1,54 @@
 import React from 'react';
 import * as Components from 'components';
-import {
-  DropdownButton,
-  MenuItem,
-} from 'react-bootstrap';
 
 
 export default class FeatureItem extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      collapse: false,
+    };
+  }
+
+  toggleCollapse = (e) => {
+    e.preventDefault();
+    this.setState({
+      collapse: !this.state.collapse,
+    });
+  }
+
   render() {
+    let featureContent = <div></div>;
+    if (!this.state.collapse) {
+      let values = this.props.feature.data.values;
+      if (!values) {
+        values = {};
+      }
+      const featureValues = (
+        <Components.FeatureValues
+          values={values} />
+      );
+      let partitions = this.props.feature.data.partitions;
+      if (!partitions) {
+        partitions = [];
+      }
+      const featurePartitions = (
+        <Components.FeaturePartitions
+          partitions={partitions} />
+      );
+
+      featureContent = (
+        <div className="feature-content">
+          { featureValues }
+          { featurePartitions }
+          <Components.FeatureRules
+            feature={this.props.feature}
+            rules={this.props.feature.data}
+            addRule={this.props.addRule}
+            removeRule={this.props.removeRule} />
+        </div>
+      );
+    }
     return (
       <div className="FeatureItem">
         <div className="feature-service-header">
@@ -17,22 +58,13 @@ export default class FeatureItem extends React.Component {
         </div>
         <div className="feature-container">
           <div className="feature">
+            <span
+              className="feature-collapse"
+              onClick={this.toggleCollapse}>
+                [{ this.state.collapse ? 'show' : 'hide' }]
+            </span>
             <h1>{this.props.feature.id}</h1>
-            <DropdownButton title="+ add component" id="ddown-feature"
-              bsSize="xsmall" bsStyle="info">
-                <MenuItem>values</MenuItem>
-                <MenuItem>partition</MenuItem>
-                <MenuItem>rule</MenuItem>
-            </DropdownButton>
-
-            <Components.FeatureValues
-              values={this.props.feature.data.values} />
-
-            <Components.FeaturePartitions
-              partitions={this.props.feature.data.partitions} />
-
-            <Components.FeatureRules
-              rules={this.props.feature.data} />
+            { featureContent }
           </div>
         </div>
       </div>
@@ -42,4 +74,6 @@ export default class FeatureItem extends React.Component {
 
 FeatureItem.propTypes = {
   feature: React.PropTypes.object,
+  addRule: React.PropTypes.func,
+  removeRule: React.PropTypes.func,
 };

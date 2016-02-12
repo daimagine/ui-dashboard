@@ -1,6 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchFeatures} from 'actions/features';
+import {
+  fetchFeatures,
+  addFeatureRule,
+  removeFeatureRule,
+} from 'actions/features';
 import * as Components from 'components';
 
 
@@ -13,11 +17,23 @@ class Features extends React.Component {
     this.props.dispatch(fetchFeatures());
   }
 
+  addRule = (feature, key) => {
+    console.log('add rule', feature, key);
+    this.props.dispatch(addFeatureRule(feature, key));
+  }
+
+  removeRule = (feature, key) => {
+    console.log('remove rule', feature, key);
+    this.props.dispatch(removeFeatureRule(feature, key));
+  }
+
   render() {
     return (
       <div>
         <Components.FeatureList
-          features={this.props.features} />
+          features={this.props.features}
+          addRule={this.addRule}
+          removeRule={this.removeRule} />
       </div>
     );
   }

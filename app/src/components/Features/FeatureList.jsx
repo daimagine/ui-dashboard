@@ -8,7 +8,9 @@ export default class FeatureList extends React.Component {
       <div className="feature-list">
         { this.props.features.map((feature) =>
             <Components.FeatureItem key={feature.id}
-              feature={feature} />
+              feature={feature}
+              addRule={this.props.addRule}
+              removeRule={this.props.removeRule} />
           )
         }
       </div>
@@ -18,4 +20,6 @@ export default class FeatureList extends React.Component {
 
 FeatureList.propTypes = {
   features: React.PropTypes.array,
+  addRule: React.PropTypes.func,
+  removeRule: React.PropTypes.func,
 };

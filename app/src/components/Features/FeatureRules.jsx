@@ -20,11 +20,19 @@ export default class FeatureRules extends React.Component {
       <div className="feature-rules">
         <h2>rules</h2>
         { rules }
+        <div className="rule-object-adder">
+          <Components.FeatureRuleCreator
+            feature={this.props.feature}
+            addRule={this.props.addRule} />
+        </div>
       </div>
     );
   }
 }
 
 FeatureRules.propTypes = {
+  feature: React.PropTypes.object,
   rules: React.PropTypes.object,
+  addRule: React.PropTypes.func,
+  removeRule: React.PropTypes.func,
 };
