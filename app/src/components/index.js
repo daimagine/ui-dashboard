@@ -9,6 +9,7 @@ import FeatureList from './Features/FeatureList';
 import FeatureItem from './Features/FeatureItem';
 import FeatureValues from './Features/FeatureValues';
 import FeaturePartitions from './Features/FeaturePartitions';
+import FeatureRules from './Features/FeatureRules';
 
 import JsonObject from './JsonObject/JsonObject';
 import JsonAttribute from './JsonObject/JsonAttribute';
@@ -28,6 +29,7 @@ export {
   FeatureItem,
   FeatureValues,
   FeaturePartitions,
+  FeatureRules,
 
   JsonObject,
   JsonAttribute,

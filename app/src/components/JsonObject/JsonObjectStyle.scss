@@ -15,6 +15,7 @@
   $darkest-gray: #292929;
   $darkester-gray: #111;
   $bluish: #f3f6fa;
+  $dark-green: #83900B;
 
   background-color: $bluish;
   background-image: linear-gradient(rgba(255, 255, 255, 1) 50%, transparent 50%, transparent);
@@ -70,6 +71,11 @@
           font-size: 14px;
           vertical-align: top;
 
+          > span {
+            display: inline-block;
+            padding-top: 5px;
+          }
+
           .form-group {
             margin-bottom: 2px;
 
@@ -79,6 +85,7 @@
                 border: none;
                 background: none;
                 box-shadow: none;
+                color: $dark-green;
               }
             }
           }

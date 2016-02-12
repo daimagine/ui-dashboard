@@ -86,6 +86,7 @@ export default class JsonAttributeCreator extends React.Component {
         attrName: '',
         attrValue: '',
         boolValue: true,
+        creating: false,
       });
     }
   }

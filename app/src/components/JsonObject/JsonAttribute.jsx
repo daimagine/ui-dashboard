@@ -128,7 +128,11 @@ export default class JsonAttribute extends React.Component {
     const { typeAttribute, className } = this.createAttribute();
     let attrKey = this.props.attrKey;
     if (this.props.parent.constructor === Array) {
-      attrKey = Number(this.props.attrKey) + 1;
+      attrKey = (
+        <span>
+          { Number(this.props.attrKey) + 1 }
+        </span>
+      );
     } else {
       attrKey = (
         <Input type="text" ref="input"
@@ -145,9 +149,7 @@ export default class JsonAttribute extends React.Component {
           <span onClick={this.handleRemove}>x</span>
         </div>
         <div className="json-attribute-name">
-          <span>
-            { attrKey }
-          </span>
+          { attrKey }
         </div>
         <div className="json-attribute-value">
           { typeAttribute }

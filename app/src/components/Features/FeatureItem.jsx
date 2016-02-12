@@ -30,6 +30,9 @@ export default class FeatureItem extends React.Component {
 
             <Components.FeaturePartitions
               partitions={this.props.feature.data.partitions} />
+
+            <Components.FeatureRules
+              rules={this.props.feature.data} />
           </div>
         </div>
       </div>
