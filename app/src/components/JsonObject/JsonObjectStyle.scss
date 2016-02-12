@@ -1,0 +1,134 @@
+.json-object-container {
+  @extend .row;
+  $yellow-green: #b0eb00;
+  $red: #b30015;
+  $blue: #2a00b3;
+  $other-blue: #0077b3;
+  $cyan: #00b0b3;
+  $transparent-cyan: #24fbff;
+  $periwinkle: #8a7dff;
+  $light-gray: #a6a6a6;
+  $gray: #595959;
+  $darkish-gray: #444;
+  $dark-gray: #363636;
+  $darker-gray: #303030;
+  $darkest-gray: #292929;
+  $darkester-gray: #111;
+  $bluish: #f3f6fa;
+
+  background-color: $bluish;
+  background-image: linear-gradient(rgba(255, 255, 255, 1) 50%, transparent 50%, transparent);
+  background-size: 62px 62px;
+  padding: 0px 0 0 5px;
+  background-attachment: local;
+
+  .json-object-attr {
+
+    .json-object-toggle {
+      @extend .col-md-12;
+      color: $light-gray;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      height: 30px;
+    }
+
+    .json-object-toggle-value {
+      @extend .col-md-12;
+
+      .json-attribute {
+        display: block;
+        min-height: 30px;
+        margin-bottom: 1px;
+
+        &:hover {
+          > .json-attribute-remove {
+            span {
+              cursor: pointer;
+              display: inline-block;
+              color: $other-blue;
+            }
+          }
+        }
+
+        .json-attribute-remove {
+          width: 15px;
+          margin-right: 5px;
+          display: inline-block;
+          vertical-align: top;
+          padding-top: 5px;
+          padding-left: 5px;
+
+          span {
+            display: none;
+          }
+        }
+
+        .json-attribute-name {
+          display: inline-block;
+          width: 100px;
+          height: 30px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          font-size: 14px;
+          vertical-align: top;
+        }
+        .json-attribute-value {
+          display: inline-block;
+          min-width: 200px;
+          min-height: 30px;
+          vertical-align: middle;
+
+          .form-group {
+            margin-bottom: 2px;
+
+            .json-value {
+              &.form-control {
+                height: 30px;
+                border: none;
+                background: none;
+                box-shadow: none;
+              }
+            }
+          }
+        }
+
+        &.parent-array {
+          > .json-attribute-name {
+            width: 10px;
+            font-size: 14px;
+            color: $light-gray;
+            padding-right: 0px;
+            text-align: right;
+          }
+        }
+      }
+    }
+
+    .json-object-adder {
+      .adder-trigger {
+        margin: 3px;
+        vertical-align: middle;
+      }
+      .adder-control {
+        margin-left: 20px;
+
+        .separator-h {
+          display: inline-block;
+          margin: 0 5px;
+        }
+        .adder-attr-config {
+          display: inline-block;
+        }
+        .form-group {
+          margin: 0 2px;
+          height: 30px;
+          display: inline-block;
+          width: 100px;
+        }
+        button {
+          margin: 0 2px;
+        }
+      }
+    }
+  }
+}

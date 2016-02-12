@@ -45,9 +45,9 @@ export default class FeatureRuleSpec extends React.Component {
 
     return (
       <div className="feature-rule-spec">
-        <h1>{this.props.id}</h1>
         {filterDiv}
         {valuesDiv}
+        <hr/>
       </div>
     );
   }

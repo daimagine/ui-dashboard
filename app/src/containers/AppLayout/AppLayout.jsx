@@ -2,13 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {DevTools} from 'containers';
 
+
 class AppLayout extends React.Component {
 
   render() {
     const {children} = this.props;
 
     return (
-      <div className="applayout">
+      <div className="app-container">
         <div className="content-wrapper">{children}</div>
         <DevTools />
       </div>

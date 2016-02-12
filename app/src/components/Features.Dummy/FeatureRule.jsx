@@ -13,6 +13,7 @@ export default class FeatureRule extends React.Component {
     return (
       <div className="feature-item">
         <h1>{this.props.id}</h1>
+        <button>add rule</button>
         { rules.map(rule =>
           <Components.FeatureRuleItem
             key={rule.id}

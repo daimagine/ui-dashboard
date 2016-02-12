@@ -1,0 +1,10 @@
+/* Bootstrap */
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+
+/* GENERAL STYLES */
+@import 'styles';
+
+/* Component Styles */
+@import '../src/components/Features/FeatureStyle';
+@import '../src/components/JsonObject/JsonObjectStyle';
