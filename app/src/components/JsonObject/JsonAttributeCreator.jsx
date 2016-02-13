@@ -8,10 +8,15 @@ import {
 export default class JsonAttributeCreator extends React.Component {
   constructor(props, context) {
     super(props, context);
+    let type = 'string';
+    if (this.props.jsonType === 'partition'
+      || this.props.jsonType === 'rules') {
+      type = 'object';
+    }
     this.state = {
       creating: false,
       attrKey: this.props.attrKey,
-      type: 'string',
+      type: type,
       boolValue: true,
       attrValue: '',
       attrName: '',
@@ -147,16 +152,24 @@ export default class JsonAttributeCreator extends React.Component {
       );
     }
 
+    const options = [];
+    if (this.props.jsonType === 'partition'
+      || this.props.jsonType === 'rules') {
+      options.push(<option key="obj" value="object">object</option>);
+    } else {
+      options.push(<option key="str" value="string">text</option>);
+      options.push(<option key="bol" value="boolean">boolean</option>);
+      options.push(<option key="obj" value="object">object</option>);
+      options.push(<option key="arr" value="array">array</option>);
+    }
+
     return (
       <div className="adder-control">
         { attrName }
         <Input type="select" placeholder="select"
           ref="type" onChange={this.changeType}
           bsSize="small">
-            <option value="string">text</option>
-            <option value="array">array</option>
-            <option value="object">object</option>
-            <option value="boolean">boolean</option>
+          { options }
         </Input>
         { attrValue }
         <Button bsSize="small"
@@ -183,4 +196,5 @@ JsonAttributeCreator.propTypes = {
   attrKey: optionalPropTypes,
   parent: optionalParentPropTypes,
   type: React.PropTypes.string,
+  jsonType: React.PropTypes.string,
 };

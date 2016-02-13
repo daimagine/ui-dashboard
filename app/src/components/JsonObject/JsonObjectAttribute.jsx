@@ -27,6 +27,7 @@ export default class JsonObjectAttribute extends React.Component {
         <div className="json-object-adder">
           <Components.JsonAttributeCreator
             type="attribute"
+            jsonType={this.props.jsonType}
             parent={this.props.value} />
         </div>
       </div>
@@ -47,4 +48,5 @@ JsonObjectAttribute.propTypes = {
   parent: optionalPropTypes,
   original: optionalPropTypes,
   attrKey: React.PropTypes.string,
+  jsonType: React.PropTypes.string,
 };

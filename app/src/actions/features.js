@@ -8,9 +8,9 @@ export function fetchFeaturesSuccess(features) {
   };
 }
 
-export function updateFeatureRuleSuccess(feature) {
+export function updateFeatureSuccess(feature) {
   return {
-    type: 'UPDATE_FEATURE_RULE_SUCCESS',
+    type: 'UPDATE_FEATURE_SUCCESS',
     feature,
   };
 }
@@ -77,7 +77,7 @@ export function addFeatureRule(feature, key) {
     const features = state.entities.features;
     const newFeature = Object.assign({}, features[feature.id]);
     newFeature.data[key] = [];
-    dispatch(updateFeatureRuleSuccess(newFeature));
+    dispatch(updateFeatureSuccess(newFeature));
   };
 }
 
@@ -88,6 +88,39 @@ export function removeFeatureRule(feature, key) {
     const features = state.entities.features;
     const newFeature = Object.assign({}, features[feature.id]);
     delete newFeature.data[key];
-    dispatch(updateFeatureRuleSuccess(newFeature));
+    dispatch(updateFeatureSuccess(newFeature));
+  };
+}
+
+export function updateFeatureRule(feature, key, rule) {
+  // TODO: hit api
+  return (dispatch, getState) => {
+    const state = getState();
+    const features = state.entities.features;
+    const newFeature = Object.assign({}, features[feature.id]);
+    newFeature.data[key] = rule;
+    dispatch(updateFeatureSuccess(newFeature));
+  };
+}
+
+export function updateValues(feature, values) {
+  // TODO: hit api
+  return (dispatch, getState) => {
+    const state = getState();
+    const features = state.entities.features;
+    const newFeature = Object.assign({}, features[feature.id]);
+    newFeature.data.values = values;
+    dispatch(updateFeatureSuccess(newFeature));
+  };
+}
+
+export function updatePartitions(feature, partitions) {
+  // TODO: hit api
+  return (dispatch, getState) => {
+    const state = getState();
+    const features = state.entities.features;
+    const newFeature = Object.assign({}, features[feature.id]);
+    newFeature.data.partitions = partitions;
+    dispatch(updateFeatureSuccess(newFeature));
   };
 }

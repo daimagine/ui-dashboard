@@ -22,6 +22,14 @@ export default class FeatureRuleItem extends React.Component {
     );
   }
 
+  handleUpdate = (rule) => {
+    this.props.updateRule(
+      this.props.feature,
+      this.props.ruleKey,
+      rule
+    );
+  }
+
   render() {
     return (
       <div className="feature-rule-json">
@@ -32,7 +40,9 @@ export default class FeatureRuleItem extends React.Component {
           <h3>{this.props.ruleKey}</h3>
         </div>
         <Components.JsonObject
-          json={this.props.rule} />
+          jsonType="rules"
+          json={this.props.rule}
+          updateJson={this.handleUpdate} />
       </div>
     );
   }
@@ -42,5 +52,6 @@ FeatureRuleItem.propTypes = {
   ruleKey: React.PropTypes.string,
   rule: React.PropTypes.array,
   removeRule: React.PropTypes.func,
+  updateRule: React.PropTypes.func,
   feature: React.PropTypes.object,
 };

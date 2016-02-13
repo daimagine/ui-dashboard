@@ -20,8 +20,7 @@ export default class JsonObject extends React.Component {
     listener.on('update', (updated) => {
       console.log('store updated', updated);
       self.setState({ store: updated });
-      // TODO: dispatch change
-      // this.props.onUpdate(updated);
+      this.props.updateJson(updated.json);
     });
   }
 
@@ -35,6 +34,8 @@ export default class JsonObject extends React.Component {
       {
         value: this.state.store.json,
         original: this.state.original.json,
+        jsonType: this.props.jsonType,
+        updateJson: this.props.updateJson,
       }
     );
     return (
@@ -50,5 +51,6 @@ JsonObject.propTypes = {
     React.PropTypes.object,
     React.PropTypes.array,
   ]),
-  // onUpdate: React.PropTypes.function,
+  jsonType: React.PropTypes.string,
+  updateJson: React.PropTypes.func,
 };

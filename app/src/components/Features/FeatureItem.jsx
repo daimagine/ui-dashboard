@@ -26,6 +26,8 @@ export default class FeatureItem extends React.Component {
       }
       const featureValues = (
         <Components.FeatureValues
+          updateValues={this.props.updateValues}
+          feature={this.props.feature}
           values={values} />
       );
       let partitions = this.props.feature.data.partitions;
@@ -34,6 +36,8 @@ export default class FeatureItem extends React.Component {
       }
       const featurePartitions = (
         <Components.FeaturePartitions
+          updatePartitions={this.props.updatePartitions}
+          feature={this.props.feature}
           partitions={partitions} />
       );
 
@@ -45,7 +49,8 @@ export default class FeatureItem extends React.Component {
             feature={this.props.feature}
             rules={this.props.feature.data}
             addRule={this.props.addRule}
-            removeRule={this.props.removeRule} />
+            removeRule={this.props.removeRule}
+            updateRule={this.props.updateRule} />
         </div>
       );
     }
@@ -76,4 +81,7 @@ FeatureItem.propTypes = {
   feature: React.PropTypes.object,
   addRule: React.PropTypes.func,
   removeRule: React.PropTypes.func,
+  updateRule: React.PropTypes.func,
+  updateValues: React.PropTypes.func,
+  updatePartitions: React.PropTypes.func,
 };

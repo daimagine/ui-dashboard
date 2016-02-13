@@ -21,6 +21,7 @@ export default class JsonBooleanAttribute extends React.Component {
     return (
       <div>
         <input type="checkbox"
+          className="bool-value"
           checked={this.state.value}
           onChange={this.updateValue} />
       </div>

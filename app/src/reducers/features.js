@@ -6,10 +6,10 @@ export default function features(state = {}, action) {
       newFeatures[feature.id] = feature;
     });
     return Object.assign({}, state, newFeatures);
-  case 'UPDATE_FEATURE_RULE_SUCCESS':
-    const updatedRuleFeatures = {};
-    updatedRuleFeatures[action.feature.id] = action.feature;
-    return Object.assign({}, state, updatedRuleFeatures);
+  case 'UPDATE_FEATURE_SUCCESS':
+    const updatedFeatures = {};
+    updatedFeatures[action.feature.id] = action.feature;
+    return Object.assign({}, state, updatedFeatures);
   default:
     return state;
   }

@@ -92,6 +92,12 @@
               }
             }
           }
+
+          .bool-value {
+            display: inline-block;
+            margin-left: 13px;
+            margin-top: 10px;
+          }
         }
 
         &.parent-array {

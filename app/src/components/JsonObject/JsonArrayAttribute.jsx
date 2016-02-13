@@ -28,6 +28,7 @@ export default class JsonArrayAttribute extends React.Component {
         <div className="json-object-adder">
           <Components.JsonAttributeCreator
             type="element"
+            jsonType={this.props.jsonType}
             parent={this.props.value}
             attrKey={keys.length} />
         </div>
@@ -46,4 +47,5 @@ JsonArrayAttribute.propTypes = {
   value: React.PropTypes.array,
   original: React.PropTypes.array,
   attrKey: React.PropTypes.string,
+  jsonType: React.PropTypes.string,
 };

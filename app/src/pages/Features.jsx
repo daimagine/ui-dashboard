@@ -4,6 +4,9 @@ import {
   fetchFeatures,
   addFeatureRule,
   removeFeatureRule,
+  updateFeatureRule,
+  updateValues,
+  updatePartitions,
 } from 'actions/features';
 import * as Components from 'components';
 
@@ -27,13 +30,31 @@ class Features extends React.Component {
     this.props.dispatch(removeFeatureRule(feature, key));
   }
 
+  updateRule = (feature, key, rule) => {
+    console.log('update rule', feature, key, rule);
+    this.props.dispatch(updateFeatureRule(feature, key, rule));
+  }
+
+  updateValues = (feature, values) => {
+    console.log('update values', feature, values);
+    this.props.dispatch(updateValues(feature, values));
+  }
+
+  updatePartitions = (feature, partitions) => {
+    console.log('update partitions', feature, partitions);
+    this.props.dispatch(updatePartitions(feature, partitions));
+  }
+
   render() {
     return (
       <div>
         <Components.FeatureList
           features={this.props.features}
           addRule={this.addRule}
-          removeRule={this.removeRule} />
+          removeRule={this.removeRule}
+          updateRule={this.updateRule}
+          updateValues={this.updateValues}
+          updatePartitions={this.updatePartitions} />
       </div>
     );
   }

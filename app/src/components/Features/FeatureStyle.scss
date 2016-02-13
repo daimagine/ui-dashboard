@@ -61,6 +61,11 @@
       float: right;
       padding: 15px 5px;
       margin-top: 10px;
+
+      &.values {
+        padding: 10px 0px;
+        margin-top: 0px;
+      }
     }
   }
 
@@ -143,6 +148,8 @@
     }
 
     .feature-rule-json {
+      margin-bottom: 15px;
+
       .rule-header {
         h3 {
           display: inline-block;
@@ -201,6 +208,13 @@
           margin: 0 2px;
         }
       }
+    }
+  }
+
+  .feature-json-preview {
+    pre {
+      background: $blackly;
+      color: $light-gray;
     }
   }
 
