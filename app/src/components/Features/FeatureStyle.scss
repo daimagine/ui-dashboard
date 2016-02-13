@@ -29,8 +29,7 @@
   .feature {
     @extend .col-md-12;
     border-bottom: 1px solid #ccc;
-    margin-bottom: 10px;
-    padding: 10px;
+    padding: 10px 10px 30px 10px;
 
     h1 {
       font-size: 28px;
@@ -143,8 +142,40 @@
       }
     }
 
+    .feature-rule-json {
+      .rule-header {
+        h3 {
+          display: inline-block;
+        }
+        .remove-rule {
+          display: inline-block;
+          width: 15px;
+          margin-right: 5px;
+          padding: 6px 5px;
+          vertical-align: top;
+
+          span {
+            display: none;
+          }
+        }
+        &:hover {
+          > .remove-rule {
+            span {
+              display: block;
+              cursor: pointer;
+              color: $dark-purple;
+            }
+          }
+        }
+      }
+      .json-object-container {
+        padding-left: 20px;
+      }
+    }
+
     .rule-object-adder {
       min-height: 30px;
+      margin-top: 10px;
 
       .adder-trigger {
         @extend .btn-primary;

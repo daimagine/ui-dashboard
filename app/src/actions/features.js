@@ -76,7 +76,7 @@ export function addFeatureRule(feature, key) {
     const state = getState();
     const features = state.entities.features;
     const newFeature = Object.assign({}, features[feature.id]);
-    newFeature.data[key] = {};
+    newFeature.data[key] = [];
     dispatch(updateFeatureRuleSuccess(newFeature));
   };
 }

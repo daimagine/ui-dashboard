@@ -8,11 +8,12 @@ export default class FeatureRules extends React.Component {
     const rules = keys.map((key) => {
       if (key !== 'values' && key !== 'partitions') {
         return (
-          <div key={'rule-' + key} className="feature-rule-json">
-            <h3>{key}</h3>
-            <Components.JsonObject
-              json={this.props.rules[key]} />
-          </div>
+          <Components.FeatureRuleItem
+            key={key}
+            ruleKey={key}
+            rule={this.props.rules[key]}
+            feature={this.props.feature}
+            removeRule={this.props.removeRule} />
         );
       }
     });
