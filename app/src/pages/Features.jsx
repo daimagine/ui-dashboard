@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {
   fetchFeatures,
+  addFeature,
+  removeFeature,
   addFeatureRule,
   removeFeatureRule,
   updateFeatureRule,
@@ -18,6 +20,16 @@ class Features extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchFeatures());
+  }
+
+  addFeature = (key, service) => {
+    console.log('add feature', key, service);
+    this.props.dispatch(addFeature(key, service));
+  }
+
+  removeFeature = (key) => {
+    console.log('remove feature', key);
+    this.props.dispatch(removeFeature(key));
   }
 
   addRule = (feature, key) => {
@@ -50,6 +62,8 @@ class Features extends React.Component {
       <div>
         <Components.FeatureList
           features={this.props.features}
+          addFeature={this.addFeature}
+          removeFeature={this.removeFeature}
           addRule={this.addRule}
           removeRule={this.removeRule}
           updateRule={this.updateRule}

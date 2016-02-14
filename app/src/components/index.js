@@ -5,6 +5,7 @@
 * ie: import {FeatureList} from 'components'
 */
 
+import FeatureCreator from './Features/FeatureCreator';
 import FeatureList from './Features/FeatureList';
 import FeatureItem from './Features/FeatureItem';
 import FeatureValues from './Features/FeatureValues';
@@ -23,6 +24,7 @@ import JsonObjectAttribute from './JsonObject/JsonObjectAttribute';
 import JsonStringAttribute from './JsonObject/JsonStringAttribute';
 
 export {
+  FeatureCreator,
   FeatureList,
   FeatureItem,
   FeatureValues,

@@ -1,4 +1,4 @@
-// import request from 'utils/request';
+import request from 'utils/request';
 
 
 export function fetchFeaturesSuccess(features) {
@@ -15,58 +15,87 @@ export function updateFeatureSuccess(feature) {
   };
 }
 
+export function deleteFeatureSuccess(id) {
+  return {
+    type: 'DELETE_FEATURE_SUCESSS',
+    id,
+  };
+}
+
 export function fetchFeatures() {
-  // return (dispatch) => {
-  //   request({
-  //     url: 'features',
-  //     method: 'GET',
-  //   }).then(features => {
-  //     dispatch(fetchFeaturesSuccess(features));
-  //   });
-  // };
+  return (dispatch) => {
+    request({
+      url: 'features',
+      method: 'GET',
+    }).then(features => {
+      dispatch(fetchFeaturesSuccess(features));
+    });
+  };
 
   // example of return value features
-  const features = [{
-    id: 'rate_us',
-    service: 'detect',
-    data: {
-      values: {
-        key1: 'val1',
-      },
-      partitions: [
-        {
-          key2: 2,
-        },
-        {
-          key2: {
-            from: 3,
-            to: 10,
-            step: 1,
-          },
-        },
-      ],
-      user: [
-        {
-          filter: {
-            iOS: '1.0.2',
-          },
-          values: {
-            user_key1: 1,
-          },
-        },
-      ],
-    },
-  }, {
-    id: 'subsribe_us',
-    service: 'detect',
-    data: {
-      values: {
-        key2: 'val2',
-      },
-    },
-  }];
+  // const features = [{
+  //   id: 'detect:rate_us',
+  //   key: 'rate_us',
+  //   service: 'detect',
+  //   data: {
+  //     values: {
+  //       key1: 'val1',
+  //     },
+  //     partitions: [
+  //       {
+  //         key2: 2,
+  //       },
+  //       {
+  //         key2: {
+  //           from: 3,
+  //           to: 10,
+  //           step: 1,
+  //         },
+  //       },
+  //     ],
+  //     user: [
+  //       {
+  //         filter: {
+  //           iOS: '1.0.2',
+  //         },
+  //         values: {
+  //           user_key1: 1,
+  //         },
+  //       },
+  //     ],
+  //   },
+  // }, {
+  //   id: 'detect:subsribe_us',
+  //   key: 'rate_us',
+  //   service: 'detect',
+  //   data: {
+  //     values: {
+  //       key2: 'val2',
+  //     },
+  //   },
+  // }];
+  // return (dispatch) => {
+  //   dispatch(fetchFeaturesSuccess(features));
+  // };
+}
+
+export function addFeature(key, service) {
+  // TODO: hit api
   return (dispatch) => {
-    dispatch(fetchFeaturesSuccess(features));
+    const newFeature = {
+      id: `${service}:${key}`,
+      key: key,
+      service: service,
+      data: {},
+    };
+    dispatch(updateFeatureSuccess(newFeature));
+  };
+}
+
+export function removeFeature(id) {
+  // TODO: hit api
+  return (dispatch) => {
+    dispatch(deleteFeatureSuccess(id));
   };
 }
 

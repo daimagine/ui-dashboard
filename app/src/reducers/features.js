@@ -10,6 +10,10 @@ export default function features(state = {}, action) {
     const updatedFeatures = {};
     updatedFeatures[action.feature.id] = action.feature;
     return Object.assign({}, state, updatedFeatures);
+  case 'DELETE_FEATURE_SUCESSS':
+    const updatedDeleteFeatures = Object.assign({}, state);
+    delete updatedDeleteFeatures[action.id];
+    return Object.assign({}, updatedDeleteFeatures);
   default:
     return state;
   }

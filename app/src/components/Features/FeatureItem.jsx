@@ -17,6 +17,11 @@ export default class FeatureItem extends React.Component {
     });
   }
 
+  handleRemove = (e) => {
+    e.preventDefault();
+    this.props.removeFeature(this.props.feature.id);
+  }
+
   render() {
     let featureContent = <div></div>;
     if (!this.state.collapse) {
@@ -56,19 +61,24 @@ export default class FeatureItem extends React.Component {
     }
     return (
       <div className="FeatureItem">
-        <div className="feature-service-header">
-          <div className="title">
-            <h1>{this.props.feature.service} service</h1>
-          </div>
-        </div>
         <div className="feature-container">
           <div className="feature">
-            <span
-              className="feature-collapse"
-              onClick={this.toggleCollapse}>
-                [{ this.state.collapse ? 'show' : 'hide' }]
-            </span>
-            <h1>{this.props.feature.id}</h1>
+            <div className="feature-header">
+              <span
+                className="feature-collapse"
+                onClick={this.toggleCollapse}>
+                  [{ this.state.collapse ? 'show' : 'hide' }]
+              </span>
+              <span
+                className="feature-collapse"
+                onClick={this.handleRemove}>
+                  [remove]
+              </span>
+              <h1>{this.props.feature.key}</h1>
+              <h2 className="subtitle">
+                {this.props.feature.service} service
+              </h2>
+            </div>
             { featureContent }
           </div>
         </div>
@@ -79,6 +89,7 @@ export default class FeatureItem extends React.Component {
 
 FeatureItem.propTypes = {
   feature: React.PropTypes.object,
+  removeFeature: React.PropTypes.func,
   addRule: React.PropTypes.func,
   removeRule: React.PropTypes.func,
   updateRule: React.PropTypes.func,

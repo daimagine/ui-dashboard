@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node_modules/.bin/webpack",
     "api:dev": "node api/src/server.js | ./node_modules/bunyan/bin/bunyan -o short",
+    "api:nodemon": "nodemon -V api/src/server.js",
     "app:dev": "node_modules/.bin/webpack-dev-server"
   },
   "author": "Adi Kurniawan",

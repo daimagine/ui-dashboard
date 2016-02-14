@@ -1,5 +1,5 @@
 const _ = require('underscore'),
-  consul = require('consul')();
+  consul = require('consul')()
 
 function parse_data(kv) {
   var cfg = {}
@@ -10,7 +10,12 @@ function parse_data(kv) {
     while (i < parts.length - 1) {
       var p = parts[i]
       if (!_.has(current, p)) {
-        current[p] = {}
+        if ((i + 1) < parts.length
+          && !isNaN(parts[i + 1])) {
+            current[p] = []
+        } else {
+          current[p] = {}
+        }
       }
       current = current[p]
       i = i + 1
@@ -47,60 +52,71 @@ function get_kv(base_key, callback) {
 }
 
 function getConsulKvByKey(key) {
-  // console.log('getConsulKvByKey:', key);
+  // console.log('getConsulKvByKey:', key)
   return function(callback) {
     let kv = {}
     get_kv(key, function(err, result) {
-      kv[key] = result;
-      callback(err, kv);
-    });
+      kv[key] = result
+      callback(err, kv)
+    })
   }
 }
 
 function getConsulBaseKeys() {
   return function(callback) {
     consul.kv.keys('api:', function(err, result) {
-      let keys = [];
+      let keys = []
       result.forEach(key => {
-        const s = key.split('/');
-        let base_key = `${_.first(s)}/`;
+        const s = key.split('/')
+        let base_key = `${_.first(s)}/`
         if (keys.indexOf(base_key) < 0) {
-          keys.push(base_key);
+          keys.push(base_key)
         }
-      });
-      // console.log('base_key:', keys);
-      callback(err, keys);
-    });
-  };
+      })
+      // console.log('base_key:', keys)
+      callback(err, keys)
+    })
+  }
 }
 
 function * getConsulKv() {
-  const keys = yield getConsulBaseKeys();
-  const kvArray = yield keys.map(getConsulKvByKey);
-  let consulKv = {};
+  const keys = yield getConsulBaseKeys()
+  const kvArray = yield keys.map(getConsulKvByKey)
+  let consulKv = {}
   kvArray.map((kv) => {
     _.extend(consulKv, kv)
   })
-  console.log('consulKv', consulKv);
-  return consulKv;
+  return consulKv
 }
 
 module.exports = {
   * get(params) {
-    consulKv = yield getConsulKv();
-    return consulKv;
+    consulKv = yield getConsulKv()
+    return consulKv
   },
 
   * getFeatures(params) {
-    const consulKv = yield getConsulKv();
-    let featuresArray = [];
-    _.map(consulKv, function(kv, key) {
-      let f = {
-        id: key
-      }
-      f['data'] = _.extend({}, kv.features);
-      featuresArray.push(f);
-    });
-    return featuresArray;
+    const consulKv = yield getConsulKv()
+    const featuresArray = []
+    Object.keys(consulKv)
+      .map((key) => {
+        const kv = consulKv[key]
+        if (kv.features) {
+          const service = key.replace('api:', '')
+            .replace('/', '')
+          Object.keys(kv.features)
+            .map((k) => {
+              const feature = kv.features[k]
+              const a = {
+                id: `${service}:${k}`,
+                key: k,
+                service: service,
+                data: feature
+              }
+              featuresArray.push(a)
+            })
+        }
+      })
+    return featuresArray
   }
 }

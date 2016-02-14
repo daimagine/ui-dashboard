@@ -49,12 +49,12 @@ export default class FeatureRules extends React.Component {
             [{ this.state.preview ? 'edit' : 'preview' }]
         </span>
         <h2>rules</h2>
-        { content }
         <div className="rule-object-adder">
           <Components.FeatureRuleCreator
             feature={this.props.feature}
             addRule={this.props.addRule} />
         </div>
+        { content }
       </div>
     );
   }
