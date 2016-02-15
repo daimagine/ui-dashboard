@@ -12,6 +12,9 @@ const app = koa();
 const featureRoutes = require('./routes/features');
 
 router.get('/features', featureRoutes.get);
+router.post('/features', featureRoutes.post);
+router.put('/features/:id', featureRoutes.put);
+router.delete('/features/:id', featureRoutes.delete);
 
 // sets the reponse headers to allow cross origin requests
 app.use(cors());
@@ -51,5 +54,6 @@ app.use(function * errorHandler(next) {
 app.use(bodyparser());
 
 app.use(router.routes());
+app.use(router.allowedMethods());
 
 app.listen(3000);

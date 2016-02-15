@@ -88,7 +88,13 @@ export function addFeature(key, service) {
       service: service,
       data: {},
     };
-    dispatch(updateFeatureSuccess(newFeature));
+    request({
+      url: 'features',
+      method: 'POST',
+      body: newFeature,
+    }).then(newFeature => {
+      dispatch(updateFeatureSuccess(newFeature));
+    });
   };
 }
 
