@@ -31,7 +31,7 @@ module.exports = {
         console.log('set updated feature', updatedFeature)
         const success = yield consul.createFeature(updatedFeature)
         if (success) {
-          this.body = 'ok'
+          this.body = updatedFeature
         } else {
           this.status = 500
           this.message = 'Update feature failed'
@@ -50,7 +50,9 @@ module.exports = {
     const id = this.params.id
     const success = yield consul.deleteFeature(id)
     if (success) {
-      this.body = 'ok'
+      this.body = {
+        status: 'ok'
+      }
     } else {
       this.status = 500
       this.message = 'Delete feature failed'

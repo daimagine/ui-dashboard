@@ -80,7 +80,6 @@ export function fetchFeatures() {
 }
 
 export function addFeature(key, service) {
-  // TODO: hit api
   return (dispatch) => {
     const newFeature = {
       id: `${service}:${key}`,
@@ -92,70 +91,100 @@ export function addFeature(key, service) {
       url: 'features',
       method: 'POST',
       body: newFeature,
-    }).then(newFeature => {
-      dispatch(updateFeatureSuccess(newFeature));
+    }).then(f => {
+      dispatch(updateFeatureSuccess(f));
     });
   };
 }
 
 export function removeFeature(id) {
-  // TODO: hit api
   return (dispatch) => {
-    dispatch(deleteFeatureSuccess(id));
+    request({
+      url: `features/${id}`,
+      method: 'DELETE',
+    }).then((status) => {
+      console.log(status);
+      dispatch(deleteFeatureSuccess(id));
+    });
   };
 }
 
 export function addFeatureRule(feature, key) {
-  // TODO: hit api
   return (dispatch, getState) => {
     const state = getState();
     const features = state.entities.features;
     const newFeature = Object.assign({}, features[feature.id]);
     newFeature.data[key] = [];
-    dispatch(updateFeatureSuccess(newFeature));
+    request({
+      url: `features/${newFeature.id}`,
+      method: 'PUT',
+      body: newFeature,
+    }).then(f => {
+      dispatch(updateFeatureSuccess(f));
+    });
   };
 }
 
 export function removeFeatureRule(feature, key) {
-  // TODO: hit api
   return (dispatch, getState) => {
     const state = getState();
     const features = state.entities.features;
     const newFeature = Object.assign({}, features[feature.id]);
     delete newFeature.data[key];
-    dispatch(updateFeatureSuccess(newFeature));
+    request({
+      url: `features/${newFeature.id}`,
+      method: 'PUT',
+      body: newFeature,
+    }).then(f => {
+      dispatch(updateFeatureSuccess(f));
+    });
   };
 }
 
 export function updateFeatureRule(feature, key, rule) {
-  // TODO: hit api
   return (dispatch, getState) => {
     const state = getState();
     const features = state.entities.features;
     const newFeature = Object.assign({}, features[feature.id]);
     newFeature.data[key] = rule;
-    dispatch(updateFeatureSuccess(newFeature));
+    request({
+      url: `features/${newFeature.id}`,
+      method: 'PUT',
+      body: newFeature,
+    }).then(f => {
+      dispatch(updateFeatureSuccess(f));
+    });
   };
 }
 
 export function updateValues(feature, values) {
-  // TODO: hit api
   return (dispatch, getState) => {
     const state = getState();
     const features = state.entities.features;
     const newFeature = Object.assign({}, features[feature.id]);
     newFeature.data.values = values;
-    dispatch(updateFeatureSuccess(newFeature));
+    request({
+      url: `features/${newFeature.id}`,
+      method: 'PUT',
+      body: newFeature,
+    }).then(f => {
+      dispatch(updateFeatureSuccess(f));
+    });
   };
 }
 
 export function updatePartitions(feature, partitions) {
-  // TODO: hit api
   return (dispatch, getState) => {
     const state = getState();
     const features = state.entities.features;
     const newFeature = Object.assign({}, features[feature.id]);
     newFeature.data.partitions = partitions;
-    dispatch(updateFeatureSuccess(newFeature));
+    request({
+      url: `features/${newFeature.id}`,
+      method: 'PUT',
+      body: newFeature,
+    }).then(f => {
+      dispatch(updateFeatureSuccess(f));
+    });
   };
 }

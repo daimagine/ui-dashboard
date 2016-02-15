@@ -11,10 +11,10 @@ export default function request(params) {
     body: JSON.stringify(params.body),
     headers: headers,
   })
-   .then(res => {
-     if (res.status >= 400) {
-       return res.json().then(err => Promise.reject(err.errors));
-     }
-     return res.json();
-   });
+  .then(res => {
+    if (res.status >= 400) {
+      return res.json().then(err => Promise.reject(err.errors));
+    }
+    return res.json();
+  });
 }

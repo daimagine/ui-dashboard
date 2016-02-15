@@ -25,9 +25,10 @@ export default class FeatureItem extends React.Component {
   render() {
     let featureContent = <div></div>;
     if (!this.state.collapse) {
-      let values = this.props.feature.data.values;
-      if (!values) {
-        values = {};
+      let values = {};
+      if (this.props.feature.data
+        && this.props.feature.data.values) {
+        values = this.props.feature.data.values;
       }
       const featureValues = (
         <Components.FeatureValues
@@ -35,9 +36,10 @@ export default class FeatureItem extends React.Component {
           feature={this.props.feature}
           values={values} />
       );
-      let partitions = this.props.feature.data.partitions;
-      if (!partitions) {
-        partitions = [];
+      let partitions = [];
+      if (this.props.feature.data
+        && this.props.feature.data.partitions) {
+        partitions = this.props.feature.data.partitions;
       }
       const featurePartitions = (
         <Components.FeaturePartitions

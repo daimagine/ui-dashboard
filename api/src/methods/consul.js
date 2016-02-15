@@ -6,24 +6,38 @@ function parse_data(kv) {
   _.each(kv, function(item) {
     var prev, current = cfg
     var parts = item['Key'].split('/')
-    var i = 0
-    while (i < parts.length - 1) {
-      var p = parts[i]
-      if (!_.has(current, p)) {
-        if ((i + 1) < parts.length
-          && !isNaN(parts[i + 1])) {
-            current[p] = []
-        } else {
+    if (!_.isEmpty(item['Value'])) {
+      var i = 0
+      while (i < parts.length - 1) {
+        var p = parts[i]
+        if (!_.has(current, p)) {
+          if ((i + 1) < parts.length
+            && !isNaN(parts[i + 1])) {
+              current[p] = []
+          } else {
+            current[p] = {}
+          }
+        }
+        current = current[p]
+        i = i + 1
+      }
+      if (parts[i].length > 0) {
+        current[parts[i]] = item['Value']
+      }
+    } else {
+      // handle folder
+      var i = 0
+      while (i < parts.length - 1) {
+        var p = parts[i]
+        if (!_.has(current, p)) {
           current[p] = {}
         }
+        current = current[p]
+        i = i + 1
       }
-      current = current[p]
-      i = i + 1
-    }
-    if(parts[i].length > 0) {
-      current[parts[i]] = item['Value']
     }
   })
+  // console.log('cfg', JSON.stringify(cfg))
   return cfg
 }
 
@@ -46,6 +60,7 @@ function get_kv(base_key, callback) {
   }, function(err, kv) {
     if (err) return callback(err)
     if (!kv || kv.length == 0) return callback(new Error('no kv found for ' + base_key))
+    // console.log('consul kv', kv)
     const cfg = parse_data(kv)[base_key.substring(0,base_key.length - 1)]
     callback(null, cfg)
   })
@@ -124,6 +139,7 @@ function * getConsulKv() {
 
 function * getFeatures() {
   const consulKv = yield getConsulKv()
+  console.log('consulKv', JSON.stringify(consulKv))
   const featuresArray = []
   Object.keys(consulKv)
     .map((key) => {
@@ -133,13 +149,19 @@ function * getFeatures() {
           .replace('/', '')
         Object.keys(kv.features)
           .map((k) => {
-            const feature = kv.features[k]
+            let feature = kv.features[k]
+            // fix for empty feature folder value
+            if (typeof feature === 'array'
+            || _.isEmpty(feature)) {
+              feature = {}
+            }
             const a = {
               id: `${service}:${k}`,
               key: k,
               service: service,
               data: feature
             }
+            console.log('feature', a)
             featuresArray.push(a)
           })
       }
