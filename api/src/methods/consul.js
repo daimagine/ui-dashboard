@@ -203,6 +203,11 @@ module.exports = {
     console.log('createFeature', key, feature)
     extract(feature.data, key)
     // console.log('kv', kv)
+    const baseResult = yield setConsulKv({
+      key: `${key}/`,
+      value: ''
+    })
+    console.log('set kv base', baseResult)
     const results = yield kv.map(setConsulKv)
     console.log('set kv results', results)
     const failures = []
